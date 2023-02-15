@@ -1,14 +1,14 @@
 #!/bin/bash
-# install git
+# install autoconf
 set -e
 
 ROOTDIR=${ZZROOT:-$HOME/app}
-NAME="git"
+NAME="automake"
 TYPE=".tar.gz"
 FILE="$NAME$TYPE"
-DOWNLOADURL="https://github.com/git/git/archive/v2.25.1.tar.gz"
+DOWNLOADURL="http://ftp.gnu.org/gnu/automake/automake-1.16.5.tar.gz"
 echo $NAME will be installed in "$ROOTDIR"
-echo "hey, install libz, opennssl and libcurl first, and temporarily remove anaconda from your PATH before install!"
+echo Dependency: m4, perl
 
 mkdir -p "$ROOTDIR/downloads"
 cd "$ROOTDIR"
@@ -26,8 +26,7 @@ tar xf downloads/$FILE -C src/$NAME --strip-components 1
 
 cd src/$NAME
 
-make configure
-./configure --prefix="$ROOTDIR" --with-curl="$ROOTDIR"
+./configure --prefix="$ROOTDIR"
 make -j"$(nproc)" && make install
 
 echo $NAME installed on "$ROOTDIR"

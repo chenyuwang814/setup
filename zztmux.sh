@@ -26,7 +26,7 @@ tar xf downloads/$FILE -C src/$NAME --strip-components 1
 
 cd src/$NAME
 
-./configure --prefix="$ROOTDIR"
+./configure --prefix="$ROOTDIR" CFLAGS="-I$ROOTDIR/include -I$ROOTDIR/include/ncurses" LDFLAGS="-L$ROOTDIR/lib -L$ROOTDIR/include/ncurses -L$ROOTDIR/include"
 make -j"$(nproc)" && make install
 
 echo $NAME installed on "$ROOTDIR"
